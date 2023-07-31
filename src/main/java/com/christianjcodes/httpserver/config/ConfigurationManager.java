@@ -3,6 +3,7 @@ package com.christianjcodes.httpserver.config;
 public class ConfigurationManager {
 
     private static ConfigurationManager myConfigurationManager;
+    private static Configuration myCurrentConfiguration;
 
     private ConfigurationManager() {
     }
