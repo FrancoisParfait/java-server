@@ -1,6 +1,7 @@
 package com.christianjcodes.httpserver.config;
 
 import com.christianjcodes.httpserver.util.Json;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.FileNotFoundException;
@@ -25,16 +26,34 @@ public class ConfigurationManager {
     /**
      * Used to load a configuration file by the provided path
      */
-    public void loadConfigurationFile(String filePath) throws IOException {
-        FileReader fileReader = new FileReader(filePath);
+    public void loadConfigurationFile(String filePath) {
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(filePath);
+        } catch (FileNotFoundException e) {
+            throw new HttpConfigurationException(e);
+        }
         StringBuffer sb = new StringBuffer();
         int i;
-        while ( (i = fileReader.read()) != -1) {
-            sb.append((char)i);
+        try {
+            while ( (i = fileReader.read()) != -1) {
+                sb.append((char)i);
+            }
+        } catch (IOException e) {
+            throw new HttpConfigurationException(e);
         }
 
-        JsonNode conf = Json.parse(sb.toString());
-        myCurrentConfiguration = Json.fromJson(conf, Configuration.class);
+        JsonNode conf = null;
+        try {
+            conf = Json.parse(sb.toString());
+        } catch (JsonProcessingException e) {
+            throw new HttpConfigurationException("Error parsing the Configuration File", e);
+        }
+        try {
+            myCurrentConfiguration = Json.fromJson(conf, Configuration.class);
+        } catch (JsonProcessingException e) {
+            throw new HttpConfigurationException("Error parsing the Configuration file, internal", e);
+        }
     }
 
     /**
