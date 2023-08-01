@@ -40,7 +40,10 @@ public class ConfigurationManager {
     /**
      * Returns the current loaded Configuration
      */
-    public void getCurrentConfiguration() {
-
+    public Configuration getCurrentConfiguration() {
+        if (myCurrentConfiguration == null) {
+            throw new HttpConfigurationException("No Current Configuration Set.");
+        }
+        return myCurrentConfiguration;
     }
 }
