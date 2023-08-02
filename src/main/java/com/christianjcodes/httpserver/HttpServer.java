@@ -34,7 +34,19 @@ public class HttpServer {
             InputStream inputStream = socket.getInputStream();
             OutputStream outputStream = socket.getOutputStream();
 
-            // TODO: write
+            String html = "<html><head><title>Simple Java HTTP Server</title></head" +
+                    "<body><h1>This page was served using my Simple Java HTTP Server</h1></body></html>";
+
+            final String CRLF = "\n\r"; // 13, 10
+
+            String response =
+                    "HTTP/1.1 200 OK" + CRLF + // Status Line : HTTP VERSION RESPONSE_CODE RESPONSE_MESSAGE
+                    "Content-Length: " + html.getBytes().length + CRLF + // HEADER
+                        CRLF +
+                        html +
+                        CRLF + CRLF;
+
+            outputStream.write(response.getBytes());
 
             inputStream.close();
             outputStream.close();
