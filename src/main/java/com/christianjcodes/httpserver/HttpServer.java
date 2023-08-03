@@ -2,6 +2,7 @@ package com.christianjcodes.httpserver;
 
 import com.christianjcodes.httpserver.config.Configuration;
 import com.christianjcodes.httpserver.config.ConfigurationManager;
+import com.christianjcodes.httpserver.core.ServerListenerThread;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,5 +28,12 @@ public class HttpServer {
         System.out.println("Using Port: " + conf.getPort());
         System.out.println("Using WebRoot: " + conf.getWebroot());
 
+        try {
+            ServerListenerThread serverListenerThread = new ServerListenerThread(conf.getPort(), conf.getWebroot());
+            serverListenerThread.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // TODO handle later.
+        }
     }
 }
