@@ -43,12 +43,6 @@ public class HttpConnectionWorkerThread extends Thread {
             outputStream.close();
             socket.close();
 
-            try {
-                sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
             LOGGER.info(" * Connection Processing Finished...");
 
         } catch (IOException e) {
