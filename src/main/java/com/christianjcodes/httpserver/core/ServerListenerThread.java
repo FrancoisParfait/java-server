@@ -32,6 +32,8 @@ public class ServerListenerThread extends Thread {
 
             Socket socket = serverSocket.accept();
 
+            LOGGER.info(" * Connection accepted: " + socket.getInetAddress());
+
             InputStream inputStream = socket.getInputStream();
             OutputStream outputStream = socket.getOutputStream();
 
