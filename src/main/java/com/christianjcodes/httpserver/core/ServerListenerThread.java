@@ -42,7 +42,7 @@ public class ServerListenerThread extends Thread {
            // serverSocket.close(); // TODO Handle close.
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Problem with setting socket", e);
         } finally {
             if (serverSocket != null) {
                 try {

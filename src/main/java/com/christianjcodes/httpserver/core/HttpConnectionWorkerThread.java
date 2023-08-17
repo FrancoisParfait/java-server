@@ -46,7 +46,7 @@ public class HttpConnectionWorkerThread extends Thread {
             LOGGER.info(" * Connection Processing Finished...");
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LOGGER.error("Problem with communication", e);
         } finally {
             if (inputStream != null) {
                 try {
