@@ -23,6 +23,9 @@ class HttpParserTest {
     @Test
     void parseHttpRequest() {
 
+        httpParser.parseHttpRequest(
+                generateValidTestCase()
+        );
 
     }
 
