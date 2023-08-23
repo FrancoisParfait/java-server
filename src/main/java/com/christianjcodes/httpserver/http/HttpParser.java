@@ -16,22 +16,22 @@ public class HttpParser {
 
         HttpRequest request = new HttpRequest();
 
-        parseRequestLine(inputStream, request);
-        parseHeaders(inputStream, request);
-        parseBody(inputStream, request);
+        parseRequestLine(reader, request);
+        parseHeaders(reader, request);
+        parseBody(reader, request);
 
         return request;
     }
 
-    private void parseRequestLine(InputStream inputStream, HttpRequest request) {
+    private void parseRequestLine(InputStreamReader reader, HttpRequest request) {
 
     }
 
-    private void parseHeaders(InputStream inputStream, HttpRequest request) {
+    private void parseHeaders(InputStreamReader reader, HttpRequest request) {
 
     }
 
-    private void parseBody(InputStream inputStream, HttpRequest request) {
+    private void parseBody(InputStreamReader reader, HttpRequest request) {
 
     }
 
