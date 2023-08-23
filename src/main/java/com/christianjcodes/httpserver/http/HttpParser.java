@@ -23,7 +23,7 @@ public class HttpParser {
         return request;
     }
 
-    private void parseBody(InputStream inputStream, HttpRequest request) {
+    private void parseRequestLine(InputStream inputStream, HttpRequest request) {
 
     }
 
@@ -31,7 +31,7 @@ public class HttpParser {
 
     }
 
-    private void parseRequestLine(InputStream inputStream, HttpRequest request) {
+    private void parseBody(InputStream inputStream, HttpRequest request) {
 
     }
 
