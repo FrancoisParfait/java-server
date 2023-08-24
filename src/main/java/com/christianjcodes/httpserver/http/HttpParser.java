@@ -44,14 +44,20 @@ public class HttpParser {
             if (_byte == CR) {
                 _byte = reader.read();
                 if (_byte == LF) {
-                    LOGGER.debug("Request Line to Process : {}", processingDataBuffer.toString());
+                    LOGGER.debug("Request Line VERSION to Process : {}", processingDataBuffer.toString());
                     return;
                 }
             }
 
             if (_byte == SP) {
                 // TODO Process previous data
-                LOGGER.debug("Request Line to Process : {}", processingDataBuffer.toString());
+                if (!methodParsed) {
+                    LOGGER.debug("Request Line METHOD to Process : {}", processingDataBuffer.toString());
+                    methodParsed = true;
+                } else if (!requestTargetParsed) {
+                    LOGGER.debug("Request Line REQ TARGET to Process : {}", processingDataBuffer.toString());
+                    requestTargetParsed = true;
+                }
                 processingDataBuffer.delete(0, processingDataBuffer.length());
             } else {
                 processingDataBuffer.append((char)_byte);
