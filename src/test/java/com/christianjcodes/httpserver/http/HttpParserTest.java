@@ -31,6 +31,14 @@ class HttpParserTest {
 
     }
 
+    @Test
+    void parseHttpRequestBadMethod1() {
+
+        HttpRequest request = httpParser.parseHttpRequest(
+                generateBadTestCaseMethodName()
+        );
+    }
+
     private InputStream generateValidGETTestCase() {
         String rawData = "GET / HTTP/1.1\n" +
                 "Host: localhost:8080\n" +
@@ -47,6 +55,21 @@ class HttpParserTest {
                 "Sec-Fetch-User: ?1\n" +
                 "Sec-Fetch-Dest: document\n" +
                 "Accept-Encoding: gzip, deflate, br\n" +
+                "Accept-Language: en-US,en;q=0.9\n" +
+                "\n";
+
+        InputStream inputStream = new ByteArrayInputStream(
+                rawData.getBytes(
+                        StandardCharsets.US_ASCII
+                )
+        );
+
+        return inputStream;
+    }
+
+    private InputStream generateBadTestCaseMethodName() {
+        String rawData = "GeT / HTTP/1.1\n" +
+                "Host: localhost:8080\n" +
                 "Accept-Language: en-US,en;q=0.9\n" +
                 "\n";
 
