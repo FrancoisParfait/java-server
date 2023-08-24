@@ -14,7 +14,7 @@ public class HttpRequest extends HttpMessage {
         return method;
     }
 
-    void setMethod(HttpMethod method) {
-        this.method = method;
+    void setMethod(HttpMethod methodName) {
+        this.method = HttpMethod.valueOf(String.valueOf(methodName));
     }
 }

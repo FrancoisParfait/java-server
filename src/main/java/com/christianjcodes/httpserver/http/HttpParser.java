@@ -53,6 +53,7 @@ public class HttpParser {
                 // TODO Process previous data
                 if (!methodParsed) {
                     LOGGER.debug("Request Line METHOD to Process : {}", processingDataBuffer.toString());
+                    request.setMethod(HttpMethod.valueOf(processingDataBuffer.toString()));
                     methodParsed = true;
                 } else if (!requestTargetParsed) {
                     LOGGER.debug("Request Line REQ TARGET to Process : {}", processingDataBuffer.toString());
