@@ -36,20 +36,23 @@ public class HttpParser {
 
         StringBuilder processingDataBuffer = new StringBuilder();
 
+        boolean methodParsed = false;
+        boolean requestTargetParsed = false;
+
         int _byte;
         while ((_byte = reader.read()) >=0) {
             if (_byte == CR) {
                 _byte = reader.read();
                 if (_byte == LF) {
-
                     LOGGER.debug("Request Line to Process : {}", processingDataBuffer.toString());
-
                     return;
                 }
             }
 
             if (_byte == SP) {
                 // TODO Process previous data
+                LOGGER.debug("Request Line to Process : {}", processingDataBuffer.toString());
+                processingDataBuffer.delete(0, processingDataBuffer.length());
             } else {
                 processingDataBuffer.append((char)_byte);
             }
