@@ -41,7 +41,7 @@ class HttpParserTest {
 
         try {
             HttpRequest request = httpParser.parseHttpRequest(
-                    generateBadTestCaseMethodName()
+                    generateBadTestCaseMethodName1()
             );
             fail();
         } catch (HttpParsingException e) {
@@ -77,7 +77,7 @@ class HttpParserTest {
         return inputStream;
     }
 
-    private InputStream generateBadTestCaseMethodName() {
+    private InputStream generateBadTestCaseMethodName1() {
         String rawData = "GeT / HTTP/1.1\n" +
                 "Host: localhost:8080\n" +
                 "Accept-Language: en-US,en;q=0.9\n" +
