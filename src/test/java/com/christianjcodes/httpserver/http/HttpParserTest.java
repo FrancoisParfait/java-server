@@ -71,7 +71,7 @@ class HttpParserTest {
             );
             fail();
         } catch (HttpParsingException e) {
-            e.printStackTrace();
+            assertEquals(e.getErrorCode(), HttpStatusCode.CLIENT_ERROR_400_BAD_REQUEST);
         }
     }
 
