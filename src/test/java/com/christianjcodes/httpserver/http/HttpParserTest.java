@@ -62,6 +62,19 @@ class HttpParserTest {
         }
     }
 
+    @Test
+    void parseHttpRequestInvNumItems1() {
+
+        try {
+            HttpRequest request = httpParser.parseHttpRequest(
+                    generateBadTestCaseRequestLineInvNumItems1()
+            );
+            fail();
+        } catch (HttpParsingException e) {
+            e.printStackTrace();
+        }
+    }
+
     private InputStream generateValidGETTestCase() {
         String rawData = "GET / HTTP/1.1\n" +
                 "Host: localhost:8080\n" +
@@ -107,6 +120,21 @@ class HttpParserTest {
 
     private InputStream generateBadTestCaseMethodName2() {
         String rawData = "GETTTT / HTTP/1.1\n" +
+                "Host: localhost:8080\n" +
+                "Accept-Language: en-US,en;q=0.9\n" +
+                "\n";
+
+        InputStream inputStream = new ByteArrayInputStream(
+                rawData.getBytes(
+                        StandardCharsets.US_ASCII
+                )
+        );
+
+        return inputStream;
+    }
+
+    private InputStream generateBadTestCaseRequestLineInvNumItems1() {
+        String rawData = "GET / AAAAAA HTTP/1.1\n" +
                 "Host: localhost:8080\n" +
                 "Accept-Language: en-US,en;q=0.9\n" +
                 "\n";
