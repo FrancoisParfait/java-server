@@ -23,9 +23,14 @@ class HttpParserTest {
     @Test
     void parseHttpRequest() {
 
-        HttpRequest request = httpParser.parseHttpRequest(
-                generateValidGETTestCase()
-        );
+        HttpRequest request = null;
+        try {
+            request = httpParser.parseHttpRequest(
+                    generateValidGETTestCase()
+            );
+        } catch (HttpParsingException e) {
+            fail(e);
+        }
 
         assertEquals(request.getMethod(), HttpMethod.GET);
 
@@ -34,9 +39,14 @@ class HttpParserTest {
     @Test
     void parseHttpRequestBadMethod1() {
 
-        HttpRequest request = httpParser.parseHttpRequest(
-                generateBadTestCaseMethodName()
-        );
+        try {
+            HttpRequest request = httpParser.parseHttpRequest(
+                    generateBadTestCaseMethodName()
+            );
+            fail();
+        } catch (HttpParsingException e) {
+            assertEquals(e.getErrorCode(), HttpStatusCode.SERVER_ERROR_501_NOT_IMPLEMENTED);
+        }
     }
 
     private InputStream generateValidGETTestCase() {
