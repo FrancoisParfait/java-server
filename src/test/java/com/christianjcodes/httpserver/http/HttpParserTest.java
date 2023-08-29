@@ -35,6 +35,8 @@ class HttpParserTest {
         assertEquals(request.getMethod(), HttpMethod.GET);
 
         // Need to go through all the files in the gitHub and check if anything is wrong.
+        // So far went through pretty much everything and I don't see any errors. Maybe I'll
+        // just keep going and see if it resolves itself.
 
     }
 
