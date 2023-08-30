@@ -87,6 +87,19 @@ class HttpParserTest {
         }
     }
 
+    @Test
+    void parseHttpRequestLineCRnoLF() {
+
+        try {
+            HttpRequest request = httpParser.parseHttpRequest(
+                    generateBadTestCaseRequestLineOnlyCRnoLF()
+            );
+            fail();
+        } catch (HttpParsingException e) {
+            assertEquals(e.getErrorCode(), HttpStatusCode.CLIENT_ERROR_400_BAD_REQUEST);
+        }
+    }
+
     private InputStream generateValidGETTestCase() {
         String rawData = "GET / HTTP/1.1\r\n" +
                 "Host: localhost:8080\r\n" +
@@ -162,6 +175,21 @@ class HttpParserTest {
 
     private InputStream generateBadTestCaseEmptyRequestLine() {
         String rawData = "\r\n" +
+                "Host: localhost:8080\r\n" +
+                "Accept-Language: en-US,en;q=0.9\r\n" +
+                "\r\n";
+
+        InputStream inputStream = new ByteArrayInputStream(
+                rawData.getBytes(
+                        StandardCharsets.US_ASCII
+                )
+        );
+
+        return inputStream;
+    }
+
+    private InputStream generateBadTestCaseRequestLineOnlyCRnoLF() {
+        String rawData = "GET / HTTP/1.1\r" + // <------ no LF
                 "Host: localhost:8080\r\n" +
                 "Accept-Language: en-US,en;q=0.9\r\n" +
                 "\r\n";
