@@ -26,4 +26,11 @@ public class HttpRequest extends HttpMessage {
                 HttpStatusCode.SERVER_ERROR_501_NOT_IMPLEMENTED
         );
     }
+
+    void setRequestTarget(String requestTarget) throws HttpParsingException {
+        if (requestTarget == null || requestTarget.isEmpty()) {
+            throw new HttpParsingException(HttpStatusCode.CLIENT_ERROR_400_BAD_REQUEST);
+        }
+        this.requestTarget = requestTarget;
+    }
 }
