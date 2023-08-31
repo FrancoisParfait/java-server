@@ -1,7 +1,9 @@
 package com.christianjcodes.httpserver.http;
 
+import java.util.regex.Pattern;
+
 public enum HttpVersion {
-    HTTP_1_1;
+    HTTP_1_1("HTTP/1.1", 1, 1);
 
     public final String LITERAL;
     public final int MAJOR;
@@ -11,5 +13,11 @@ public enum HttpVersion {
         this.LITERAL = LITERAL;
         this.MAJOR = MAJOR;
         this.MINOR = MINOR;
+    }
+
+    public static final Pattern httpVerionRegexPattern = Pattern.compile("^HTTP/(?<major>\\d+).(?<minor>\\d+)");
+
+    public static HttpVersion getBestCompatibleVersion(String literalVersion) {
+
     }
 }
