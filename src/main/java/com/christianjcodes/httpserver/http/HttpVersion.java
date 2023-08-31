@@ -24,5 +24,23 @@ public enum HttpVersion {
             //TODO check if this is the exception we want to send
             throw new HttpParsingException(HttpStatusCode.SERVER_ERROR_500_INTERNAL_SERVER_ERROR);
         }
+
+        int major = Integer.parseInt(matcher.group("major"));
+        int minor = Integer.parseInt(matcher.group("minor"));
+
+        HttpVersion tempBestCompatible = null;
+
+        for (HttpVersion version : HttpVersion.values()) {
+            if (version.LITERAL.equals(literalVersion)) {
+                return version;
+            } else {
+                if (version.MAJOR == major) {
+                    if (version.MINOR < minor) {
+                        tempBestCompatible = version;
+                    }
+                }
+            }
+        }
+        return tempBestCompatible;
     }
 }
