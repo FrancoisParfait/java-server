@@ -14,6 +14,10 @@ public class HttpRequest extends HttpMessage {
         return method;
     }
 
+    public String getRequestTarget() {
+        return requestTarget;
+    }
+
     void setMethod(String methodName) throws HttpParsingException {
         for (HttpMethod method: HttpMethod.values()) {
             if (methodName.equals(method.name())) {
