@@ -136,6 +136,7 @@ class HttpParserTest {
             );
             assertNotNull(request);
             assertEquals(request.getBestCompatibleHttpVersion(), HttpVersion.HTTP_1_1);
+            assertEquals(request.getOriginalHttpVersion(), "HTTP/1.2");
         } catch (HttpParsingException e) {
             fail();
         }

@@ -23,6 +23,10 @@ public class HttpRequest extends HttpMessage {
         return bestCompatibleHttpVersion;
     }
 
+    public String getOriginalHttpVersion() {
+        return originalHttpVersion;
+    }
+
     void setMethod(String methodName) throws HttpParsingException {
         for (HttpMethod method: HttpMethod.values()) {
             if (methodName.equals(method.name())) {
