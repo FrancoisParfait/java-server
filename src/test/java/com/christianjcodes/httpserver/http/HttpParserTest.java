@@ -34,7 +34,7 @@ class HttpParserTest {
         assertNotNull(request);
         assertEquals(request.getMethod(), HttpMethod.GET);
         assertEquals(request.getRequestTarget(), "/");
-        assertEquals(request.getOriginalHttpVersion(), "Http/1.1");
+        assertEquals(request.getOriginalHttpVersion(), "HTTP/1.1");
         assertEquals(request.getBestCompatibleHttpVersion(), HttpVersion.HTTP_1_1);
     }
 
