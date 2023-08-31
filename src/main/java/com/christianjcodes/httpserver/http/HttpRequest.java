@@ -19,6 +19,10 @@ public class HttpRequest extends HttpMessage {
         return requestTarget;
     }
 
+    public HttpVersion getBestCompatibleHttpVersion() {
+        return bestCompatibleHttpVersion;
+    }
+
     void setMethod(String methodName) throws HttpParsingException {
         for (HttpMethod method: HttpMethod.values()) {
             if (methodName.equals(method.name())) {
