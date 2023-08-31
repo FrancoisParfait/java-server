@@ -18,11 +18,10 @@ public enum HttpVersion {
 
     public static final Pattern httpVerionRegexPattern = Pattern.compile("^HTTP/(?<major>\\d+).(?<minor>\\d+)");
 
-    public static HttpVersion getBestCompatibleVersion(String literalVersion) throws HttpParsingException {
+    public static HttpVersion getBestCompatibleVersion(String literalVersion) throws BadHttpVersionException {
         Matcher matcher = httpVerionRegexPattern.matcher(literalVersion);
         if (!matcher.find() || matcher.groupCount() != 2) {
-            //TODO check if this is the exception we want to send
-            throw new HttpParsingException(HttpStatusCode.SERVER_ERROR_500_INTERNAL_SERVER_ERROR);
+            throw new BadHttpVersionException();
         }
 
         int major = Integer.parseInt(matcher.group("major"));
